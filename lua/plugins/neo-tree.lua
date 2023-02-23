@@ -1,4 +1,4 @@
-return  {
+return {
   -- File manager
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -8,22 +8,19 @@ return  {
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     },
-    event = "VeryLazy",
+    keys = {
+      { '\\', '<cmd>Neotree reveal toggle<cr>' },
+    },
     init = function()
-      -- Unless you are still migrating, remove the deprecated commands from v1.x
-      vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+      -- Unless you are still migrating, remove the deprecated commands from v1.c-x
+      -- Old version: vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+      vim.g.neo_tree_remove_legacy_commands = 1
 
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-      vim.fn.sign_define("DiagnosticSignError",
-      {text = " ", texthl = "DiagnosticSignError"})
-      vim.fn.sign_define("DiagnosticSignWarn",
-      {text = " ", texthl = "DiagnosticSignWarn"})
-      vim.fn.sign_define("DiagnosticSignInfo",
-      {text = " ", texthl = "DiagnosticSignInfo"})
-      vim.fn.sign_define("DiagnosticSignHint",
-      {text = "", texthl = "DiagnosticSignHint"})
-
-      vim.cmd([[nnoremap <silent> \ :Neotree reveal toggle<cr>]])
+      vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+      vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+      vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+      vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
     end,
     opts = {
       close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
@@ -31,7 +28,7 @@ return  {
       enable_git_status = true,
       enable_diagnostics = true,
       sort_case_insensitive = false, -- used when sorting files and directories in the tree
-      sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+      sort_function = nil, -- use a custom function for sorting files and directories in the tree
       -- sort_function = function (a,b)
       --       if a.type == b.type then
       --           return a.path > b.path
@@ -80,10 +77,10 @@ return  {
             -- Change type
             added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
             modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted   = "✖",-- this can only be used in the git_status source
-            renamed   = "",-- this can only be used in the git_status source
+            deleted   = "✖", -- this can only be used in the git_status source
+            renamed   = "", -- this can only be used in the git_status source
             -- Status type
-            untracked = "",
+            untracked = "?", -- 
             ignored   = "",
             unstaged  = "",
             staged    = "",
@@ -101,7 +98,7 @@ return  {
         mappings = {
           ["<space>"] = {
             "toggle_node",
-            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
           },
           ["<2-LeftMouse>"] = "open",
           ["<cr>"] = "open",
@@ -166,7 +163,7 @@ return  {
           },
           always_show = {
             -- remains visible even if other settings would normally hide it
-           --".gitignored",
+            --".gitignored",
           },
           never_show = {
             -- remains hidden even if visible is toggled to true, this overrides always_show

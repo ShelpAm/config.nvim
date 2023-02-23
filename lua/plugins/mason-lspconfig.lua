@@ -1,9 +1,9 @@
 return {
   {
     "williamboman/mason-lspconfig.nvim",
+    cmd = { 'LSPInstall' },
     dependencies = {
       'williamboman/mason.nvim',
-      'neovim/nvim-lspconfig',
     },
     opts = {
       -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }

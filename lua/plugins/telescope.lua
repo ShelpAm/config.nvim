@@ -9,11 +9,11 @@ return {
       vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
       local telescope = require('telescope.builtin')
-      local keymap = require('config.keymap')
-      keymap.nnoremap('<leader>ff', telescope.find_files)
-      keymap.nnoremap('<leader>fg', telescope.live_grep)
-      keymap.nnoremap('<leader>fb', telescope.buffers)
-      keymap.nnoremap('<leader>fh', telescope.help_tags)
+      local keymaps = require('config.keymaps')
+      keymaps.nnoremap('<leader>ff', telescope.find_files)
+      keymaps.nnoremap('<leader>fg', telescope.live_grep)
+      keymaps.nnoremap('<leader>fb', telescope.buffers)
+      keymaps.nnoremap('<leader>fh', telescope.help_tags)
     end,
   },
 }
