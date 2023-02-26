@@ -1,5 +1,13 @@
 return {
-  -- File manager
+  {
+    "windwp/nvim-autopairs",
+    event = 'VeryLazy',
+    opts = {},
+    config = function()
+      require("nvim-autopairs").setup()
+    end
+  },
+  -- File explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -9,7 +17,8 @@ return {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { '\\', '<cmd>Neotree reveal toggle<cr>' },
+      -- { '\\', '<cmd>Neotree reveal toggle<cr>' },
+      { '\\', '<cmd>Neotree reveal<cr>' },
     },
     init = function()
       -- Unless you are still migrating, remove the deprecated commands from v1.c-x
@@ -98,7 +107,7 @@ return {
         mappings = {
           ["<space>"] = {
             "toggle_node",
-            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+            nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
           },
           ["<2-LeftMouse>"] = "open",
           ["<cr>"] = "open",
@@ -227,5 +236,21 @@ return {
         }
       }
     },
-  }
+  },
+  -- Fuzzy finder
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    lazy = false,
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    cmd = {
+      'Telescope',
+    },
+    keys = {
+      { '<leader>ff', function() require('telescope.builtin').find_files() end },
+      { '<leader>fg', function() require('telescope.builtin').live_grep() end },
+      { '<leader>fb', function() require('telescope.builtin').buffers() end },
+      { '<leader>fh', function() require('telescope.builtin').help_tags() end },
+    },
+  },
 }

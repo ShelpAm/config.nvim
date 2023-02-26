@@ -1,4 +1,12 @@
 return {
+  -- Colorscheme
+  {
+    'morhetz/gruvbox',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('gruvbox')
+    end,
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -49,7 +57,7 @@ return {
     },
     config = function(opts)
       require('catppuccin').setup(opts)
-      vim.cmd([[colorscheme catppuccin]])
+      vim.cmd.colorscheme('catppuccin')
     end,
   },
 }

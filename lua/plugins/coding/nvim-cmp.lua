@@ -1,11 +1,8 @@
 return {
-  -- Language server supports
   {
     'hrsh7th/nvim-cmp',
-    event = { "BufReadPre", "BufNewFile" },
+    event = { 'BufEnter' },
     dependencies = {
-      'neovim/nvim-lspconfig',
-      'onsails/lspkind.nvim',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
       'davidsierradz/cmp-conventionalcommits',
@@ -18,7 +15,7 @@ return {
       -- Mappings.
       -- See `:help vim.diagnostic.*` for documentation on any of the below functions
       local opts = { noremap = true, silent = true }
-      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+      vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
       vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
       --vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts) -- TODO conflicts with keymaps.lua
@@ -47,90 +44,8 @@ return {
         --vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
       end
 
-      local lsp_servers = require('config.lsp')
-      local lspconfig = require('lspconfig')
-      -- Add additional capabilities supported by nvim-cmp
-      for _, lsp_server in ipairs(lsp_servers) do
-        lspconfig[lsp_server].setup {
-          capabilities = require('cmp_nvim_lsp').default_capabilities(),
-          on_attach = on_attach,
-        }
-      end
-
-      lspconfig.lua_ls.setup {
-        settings = {
-          Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { 'vim' },
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
-      }
-
-      local lspkind = require('lspkind')
-      lspkind.init({
-        -- defines how annotations are shown
-        -- default: symbol
-        -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-        mode = 'symbol_text',
-        -- default symbol map
-        -- can be either 'default' (requires nerd-fonts font) or
-        -- 'codicons' for codicon preset (requires vscode-codicons font)
-        -- default: 'default'
-        preset = 'codicons',
-        -- override preset symbols
-        -- default: {}
-        symbol_map = {
-          Text = "",
-          Method = "",
-          Function = "",
-          Constructor = "",
-          Field = "",
-          Variable = "",
-          Class = "ﴯ",
-          Interface = "",
-          Module = "",
-          Property = "ﰠ",
-          Unit = "",
-          Value = "",
-          Enum = "",
-          Keyword = "",
-          Snippet = "",
-          Color = "",
-          File = "",
-          Reference = "",
-          Folder = "",
-          EnumMember = "",
-          Constant = "",
-          Struct = "",
-          Event = "",
-          Operator = "",
-          TypeParameter = ""
-        },
-        menu = {
-          buffer = "[Buffer]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[LuaSnip]",
-          nvim_lua = "[Lua]",
-          latex_symbols = "[Latex]",
-          path = '[Path]',
-        },
-      })
-
       local cmp = require('cmp')
+      local lspkind = require('lspkind')
       cmp.setup({
         snippet = {
           -- REQUIRED - you must specify a snippet engine

@@ -1,4 +1,5 @@
 return {
+  -- Comment support
   {
     'numToStr/Comment.nvim',
     keys = {
@@ -50,5 +51,5 @@ return {
     config = function(opts)
       require('Comment').setup(opts)
     end
-  }
+  },
 }

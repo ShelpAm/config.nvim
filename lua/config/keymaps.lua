@@ -53,6 +53,9 @@ map('n', '<S-l>', '<cmd>bn<cr>', { desc = 'Next buffer' })
 map('n', '[b', '<cmd>bp<cr>', { desc = 'Prev buffer' })
 map('n', ']b', '<cmd>bn<cr>', { desc = 'Next buffer' })
 
+-- Buffer
+map('n', '<leader>bd', '<Cmd>bd<Cr>')
+
 -- Move Lines
 map('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move down' })
 map('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move up' })
@@ -62,25 +65,28 @@ map('v', '<A-j>', ':m ">+1<cr>gv=gv', { desc = 'Move down' })
 map('v', '<A-k>', ':m "<-2<cr>gv=gv', { desc = 'Move up' })
 
 -- Toggle Spelling
-map('n', '<leader>us', '<cmd>lua vim.opt.spell = false<cr>', { desc = 'Toggle spelling' })
+map('n', '<leader>ts', '<cmd>lua vim.opt.spell = false<cr>', { desc = 'Toggle spelling' })
+map('n', '<leader>th', function() vim.opt.hlsearch = vim.opt.hlsearch ~= true end, { desc = 'Toggle hlsearch' })
 
 -- Save file
 map('n', '<leader>w', '<cmd>w<cr>', { desc = 'Save file' })
 map({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
--- Better indenting
-noremap('v', '<', '<gv')
-noremap('v', '>', '>gv')
-
 -- lazy
 map('n', '<leader>l', '<cmd>:Lazy<cr>', { desc = 'Lazy' })
 
--- quit all
+-- quit
 map('n', '<leader>qw', '<cmd>q<cr>', { desc = 'Quit window' })
 map('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 
 -- Source current file
-map('n', '<leader>s', '<Cmd>w<Cr><Cmd>source %<Cr>', { desc = 'Source current file' })
+map('n', '<leader>s', function()
+  if vim.bo.filetype == 'lua' then
+    vim.cmd([[w | source %]])
+  elseif vim.bo.filetype == 'zsh' then
+    vim.cmd([[silent !exec zsh]])
+  end
+end, { desc = 'Source current file' })
 
 -- Use `jk` as escape
 map('i', 'jk', '<esc>', { desc = 'Escape' })

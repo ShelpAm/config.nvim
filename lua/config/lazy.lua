@@ -12,11 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Use :h lazy.nvim-lazy.nvim-installation
-require('lazy').setup('plugins', {
+require('lazy').setup({
+  -- { import = 'plugins' },
+  { import = 'plugins.coding' },
+  { import = 'plugins.colorscheme' },
+  { import = 'plugins.editor' },
+  { import = 'plugins.ui' },
+  { import = 'plugins.util' },
+}, {
   root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
   defaults = {
     lazy = true, -- should plugins be lazy-loaded?
-    version = '*',
+    -- version = '*',
     -- version = "*", -- enable this to try installing the latest stable versions of plugins
   },
   -- leave nil when passing the spec as the first argument to setup()

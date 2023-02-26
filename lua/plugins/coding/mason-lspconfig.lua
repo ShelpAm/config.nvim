@@ -1,18 +1,23 @@
 return {
   {
     "williamboman/mason-lspconfig.nvim",
-    cmd = { 'LSPInstall' },
     dependencies = {
       'williamboman/mason.nvim',
     },
-    opts = {
+    cmd = {
+      'LspInstall',
+    },
+    event = {
+      'BufEnter'
+    },
+    config = function()
+      local config = {
+        lsp = require('config.lsp'),
+      }
+      require('mason-lspconfig').setup({
       -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
       -- This setting has no relation with the `automatic_installation` setting.
-      ensure_installed = {
-        'lua_ls',
-        'clangd',
-        'cmake',
-      },
+      ensure_installed = config.lsp.lsp_servers,
 
       -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
       -- This setting has no relation with the `ensure_installed` setting.
@@ -22,9 +27,7 @@ return {
       --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
       --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
       automatic_installation = true,
-    },
-    config = function(opts)
-      require('mason-lspconfig').setup(opts)
+    })
     end,
   },
 }

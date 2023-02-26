@@ -66,5 +66,5 @@ return {
         Fragment = { icon = "", hl = "@constant" },
       },
     },
-  }
+  },
 }
