@@ -6,10 +6,7 @@ vim.g.localmapleader = ' '
 
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
-  if opts.noremap == nil then
-    opts.noremap = false
-  end
-  opts.silent = opts.silent ~= false
+  opts.silent = true
   return vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -54,7 +51,10 @@ map('n', '[b', '<cmd>bp<cr>', { desc = 'Prev buffer' })
 map('n', ']b', '<cmd>bn<cr>', { desc = 'Next buffer' })
 
 -- Buffer
-map('n', '<leader>bd', '<Cmd>bd<Cr>')
+map('n', '<leader>bd', '<cmd>bd<cr>')
+
+-- Window
+map('n', '<leader>wq', '<cmd>q<cr>', { desc = 'Quit current window' })
 
 -- Move Lines
 map('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move down' })
@@ -64,25 +64,27 @@ map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 map('v', '<A-j>', ':m ">+1<cr>gv=gv', { desc = 'Move down' })
 map('v', '<A-k>', ':m "<-2<cr>gv=gv', { desc = 'Move up' })
 
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+map('n', '<leader>d', vim.diagnostic.open_float)
+map('n', '[d', vim.diagnostic.goto_prev)
+map('n', ']d', vim.diagnostic.goto_next)
+map('n', '<leader>q', vim.diagnostic.setloclist)
+
 -- Toggle Spelling
-map('n', '<leader>ts', '<cmd>lua vim.opt.spell = false<cr>', { desc = 'Toggle spelling' })
-map('n', '<leader>th', function() vim.opt.hlsearch = vim.opt.hlsearch ~= true end, { desc = 'Toggle hlsearch' })
+map('n', '<leader>ts', '<cmd>set spell!<cr>', { desc = 'Toggle spelling check' })
+map('n', '<leader>th', '<cmd>set hlsearch!<cr>', { desc = 'Toggle hlsearch' })
 
 -- Save file
-map('n', '<leader>w', '<cmd>w<cr>', { desc = 'Save file' })
-map({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
+-- map('n', '<leader>w', '<cmd>w<cr>', { desc = 'Save file' })
+map({ 'i', 'v', 'n', 's' }, '<C-S>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
 -- lazy
-map('n', '<leader>l', '<cmd>:Lazy<cr>', { desc = 'Lazy' })
-
--- quit
-map('n', '<leader>qw', '<cmd>q<cr>', { desc = 'Quit window' })
-map('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
+map('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 
 -- Source current file
 map('n', '<leader>s', function()
   if vim.bo.filetype == 'lua' then
-    vim.cmd([[w | source %]])
+    vim.cmd([[silent w | silent source %]])
   elseif vim.bo.filetype == 'zsh' then
     vim.cmd([[silent !exec zsh]])
   end

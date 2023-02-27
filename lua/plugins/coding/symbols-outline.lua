@@ -2,6 +2,9 @@ return {
   -- Symbols viewer
   {
     'simrat39/symbols-outline.nvim',
+    cmd = {
+      'SymbolsOutline',
+    },
     opts = {
       highlight_hovered_item = true,
       show_guides = true,
@@ -20,7 +23,7 @@ return {
       wrap = false,
       keymaps = {
         -- These keymaps can be a string or a table for multiple keys
-        close = {"<Esc>", "q"},
+        close = { "<Esc>", "q" },
         goto_location = "<Cr>",
         focus_location = "o",
         hover_symbol = "<C-space>",

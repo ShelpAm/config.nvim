@@ -20,9 +20,9 @@ opt.hlsearch = true -- Whether to highlight matches
 opt.ignorecase = true -- Ignore case when searching for strings
 opt.inccommand = 'nosplit' -- Preview incremental substitute
 opt.incsearch = true -- Search as characters are entered
-opt.laststatus = 0
+opt.laststatus = 2
 opt.list = true -- Show some invisible characters (tabs...
-opt.listchars = 'tab:> ,trail:.,nbsp:+'
+opt.listchars = { tab = '> ', trail = '.', nbsp = '+' }
 opt.mouse = 'a' -- Enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
@@ -34,6 +34,7 @@ opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append { W = true, I = true, c = true }
 opt.showmode = false -- Dont show mode since we have a statusline
+opt.showtabline = 2
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
@@ -48,6 +49,7 @@ opt.termguicolors = true -- True color support
 opt.textwidth = 80
 opt.timeout = true
 opt.timeoutlen = 500
+opt.undodir = '/home/small-sheep/.local/state/nvim/undo/'
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
@@ -62,3 +64,5 @@ end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+vim.g.loaded_netrwPlugin = 1

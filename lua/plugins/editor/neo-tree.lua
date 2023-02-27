@@ -1,14 +1,5 @@
 return {
   {
-    "windwp/nvim-autopairs",
-    event = 'VeryLazy',
-    opts = {},
-    config = function()
-      require("nvim-autopairs").setup()
-    end
-  },
-  -- File explorer
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     dependencies = {
@@ -235,22 +226,6 @@ return {
           }
         }
       }
-    },
-  },
-  -- Fuzzy finder
-  {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    lazy = false,
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    cmd = {
-      'Telescope',
-    },
-    keys = {
-      { '<leader>ff', function() require('telescope.builtin').find_files() end },
-      { '<leader>fg', function() require('telescope.builtin').live_grep() end },
-      { '<leader>fb', function() require('telescope.builtin').buffers() end },
-      { '<leader>fh', function() require('telescope.builtin').help_tags() end },
     },
   },
 }

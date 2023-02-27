@@ -1,5 +1,4 @@
 return {
-  -- Other plugins
   {
     "folke/which-key.nvim",
     event = 'VeryLazy',
@@ -8,7 +7,7 @@ return {
         marks = false, -- shows a list of your marks on ' and `
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
-          enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+          enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
           suggestions = 20, -- how many suggestions should be shown in the list?
         },
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
@@ -79,12 +78,4 @@ return {
       },
     },
   },
-  {
-  "folke/persistence.nvim",
-  event = "BufReadPre", -- this will only start session saving when an actual file was opened
-  module = "persistence",
-  config = function()
-    require("persistence").setup()
-  end,
-  }
 }
