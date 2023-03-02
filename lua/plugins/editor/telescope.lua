@@ -16,8 +16,8 @@ return {
       { '<leader>fh', function() require('telescope.builtin').help_tags() end },
     },
     config = function()
-      local telescope = require("telescope")
-      local trouble = require("trouble.providers.telescope")
+      local telescope = require('telescope')
+      local trouble = require('trouble.providers.telescope')
       telescope.setup({
         defaults = {
           -- Default configuration for telescope goes here:
@@ -25,7 +25,10 @@ return {
           mappings = {
             i = { ["<c-t>"] = trouble.open_with_trouble },
             n = { ["<c-t>"] = trouble.open_with_trouble },
-          }
+          },
+          layout_config = {
+            vertical = { width = 0.5 },
+          },
         },
         pickers = {
           -- Default configuration for builtin pickers goes here:
@@ -44,6 +47,6 @@ return {
           -- please take a look at the readme of the extension you want to configure
         }
       })
-    end
+    end,
   },
 }

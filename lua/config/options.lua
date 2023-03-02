@@ -6,6 +6,7 @@ opt.background = 'dark'
 opt.binary = true
 opt.clipboard = 'unnamedplus' -- Sync with system clipboard
 opt.colorcolumn = { '+0', '+20' }
+opt.cmdheight = 1
 opt.completeopt = 'menu,menuone,noselect'
 opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- Confirm to save changes before exiting modified buffer

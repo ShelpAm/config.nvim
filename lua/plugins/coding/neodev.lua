@@ -23,19 +23,19 @@ return {
       -- With lspconfig, Neodev will automatically setup your lua-language-server
       -- If you disable this, then you have to set {before_init=require("neodev.lsp").before_init}
       -- in your lsp start options
-      lspconfig = true,
+      -- lspconfig = true,
       -- much faster, but needs a recent built of lua-language-server
       -- needs lua-language-server >= 3.6.0
       pathStrict = true,
     })
-    require('lspconfig').lua_ls.setup({
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = "Replace"
-          }
-        }
-      }
-    })
+    -- require('lspconfig').lua_ls.setup({
+    --   settings = {
+    --     Lua = {
+    --       completion = {
+    --         callSnippet = "Replace"
+    --       }
+    --     }
+    --   }
+    -- })
   end,
 }

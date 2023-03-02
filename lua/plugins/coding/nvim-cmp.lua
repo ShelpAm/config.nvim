@@ -1,9 +1,6 @@
 return {
   {
     'hrsh7th/nvim-cmp',
-    event = {
-      'BufEnter',
-    },
     dependencies = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
@@ -13,7 +10,10 @@ return {
       'hrsh7th/cmp-vsnip',
       'hrsh7th/vim-vsnip',
     },
-    init = function()
+    event = {
+      'BufEnter',
+    },
+    config = function()
       local cmp = require('cmp')
       local lspkind = require('lspkind')
       cmp.setup({
